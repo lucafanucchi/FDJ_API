@@ -6,6 +6,42 @@ import shutil
 import time
 import requests
 
+
+import streamlit as st
+import os
+import tempfile
+import shutil
+import time
+import requests
+
+st.set_page_config(page_title="Playlist Downloader", layout="centered")
+st.text("✅ Streamlit carregado")
+
+try:
+    from spotify_utils import get_spotify_tracks
+    st.text("✅ spotify_utils importado")
+except Exception as e:
+    st.text(f"❌ Erro ao importar spotify_utils: {e}")
+
+try:
+    from deezer_utils import get_deezer_tracks
+    st.text("✅ deezer_utils importado")
+except Exception as e:
+    st.text(f"❌ Erro ao importar deezer_utils: {e}")
+
+try:
+    from youtube_utils import search_and_download
+    st.text("✅ youtube_utils importado")
+except Exception as e:
+    st.text(f"❌ Erro ao importar youtube_utils: {e}")
+
+try:
+    from zip_utils import zip_directory
+    st.text("✅ zip_utils importado")
+except Exception as e:
+    st.text(f"❌ Erro ao importar zip_utils: {e}")
+
+
 from spotify_utils import get_spotify_tracks
 from deezer_utils import get_deezer_tracks
 from youtube_utils import search_and_download

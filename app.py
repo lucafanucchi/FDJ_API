@@ -63,7 +63,7 @@ if st.session_state.tracks:
             status_text = st.empty()
             st.markdown("Iniciando download...")
 
-            for i, track in enumerate(st.session_state.tracks):
+            for track in st.session_state.tracks:
                 name = f"{track['artist']} - {track['title']}"
                 if name in selected_names:
                     status_text.markdown(f"Baixando: **{name}**")
@@ -71,9 +71,12 @@ if st.session_state.tracks:
                     time.sleep(0.3)
 
             status_text.markdown("Download finalizado!")
-
             zip_file_path = zip_directory(temp_dir, "musicas_baixadas")
             with open(zip_file_path, "rb") as f:
-                st.download_button("Baixar ZIP", f, file_name="musicas_baixadas.zip")
-
+                st.download_button(
+                    label="Baixar ZIP",
+                    data=f,
+                    file_name=os.path.basename(zip_file_path),
+                    mime="application/zip"
+                )
             shutil.rmtree(temp_dir)

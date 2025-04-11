@@ -42,7 +42,11 @@ def search_and_download(search_query, download_path):
             # Enviar para API e receber MP3
             with open(temp_webm_path, "rb") as f:
                 files = {'file': (f"{search_query}.webm", f)}
-                response = requests.post(CONVERTER_API_URL, files=files)
+                try:
+                    response = requests.post(CONVERTER_API_URL, files=files, timeout=30)
+                except requests.exceptions.Timeout:
+                    print(f"Timeout ao converter {search_query}")
+                    return
 
             if response.status_code == 200:
                 output_path = os.path.join(download_path, f"{search_query}.mp3")

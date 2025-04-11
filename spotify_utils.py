@@ -5,8 +5,9 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 def get_spotify_tracks(playlist_url):
     try:
-        SPOTIPY_CLIENT_ID = st.secrets["spotify"]["CLIENT_ID"]
-        SPOTIPY_CLIENT_SECRET = st.secrets["spotify"]["CLIENT_SECRET"]
+        SPOTIPY_CLIENT_ID = st.secrets["SPOTIPY_CLIENT_ID"]
+        SPOTIPY_CLIENT_SECRET = st.secrets["SPOTIPY_CLIENT_SECRET"]
+
     except KeyError:
         st.error("Credenciais do Spotify não configuradas corretamente no secrets.toml.")
         return []
